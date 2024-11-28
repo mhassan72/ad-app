@@ -15,6 +15,14 @@ const api_result : any = ref([])
 const api_search_term : any = ref('')
 const base_image_url = "https://image.tmdb.org/t/p/w500"
 
+function truncate(value: string, length: number) {
+  if (value.length > length) {
+      return value.substring(0, length) + "...";
+  } else {
+      return value;
+    }
+}
+
 async function generateTitle (data: any) {
   let poster_url = ''
   let backdrop_url = ''
@@ -119,7 +127,7 @@ onMounted(() => {
           class="title"
           >
           <div class="thumbnail" :style="{  'background-image': `url(${base_image_url + title.poster_path})`}"></div>  
-          {{ title.title }}
+          {{ truncate(title.title, 3) }}
           <button @click="generateTitle(title)"> Generate </button>
         </li>
       </ul>
@@ -155,7 +163,8 @@ onMounted(() => {
 
         <div class="thumbnail" :style="{  'background-image': `url(${title.poster_path})`}"></div>
 
-        {{ title.title }}
+        {{ truncate(title.title, 23) }}
+        
         <hr />
 
         <button @click="deleteTitle(title.id)">  Delete </button>
