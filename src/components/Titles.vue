@@ -106,13 +106,25 @@ onMounted(() => {
       <button @click="autoGenerate">  search </button>
       {{ api_search_term }} -
       <!-- {{ api_result }} -->
-      {{  newTitle }}
+      <!-- {{  newTitle }} -->
 
       <br />
 
-      <p>________________________</p>
+      <strong>Results</strong>
 
-      <li 
+      <ul class="listTitles">
+        <li 
+          v-for="title in api_result" 
+          :key="title.id"
+          class="title"
+          >
+          <div class="thumbnail" :style="{  'background-image': `url(${base_image_url + title.poster_path})`}"></div>  
+          {{ title.title }}
+          <button @click="generateTitle(title)"> Generate </button>
+        </li>
+      </ul>
+
+      <!-- <li 
         v-for="title in api_result" 
         :key="title.id"
         >
@@ -131,26 +143,21 @@ onMounted(() => {
 
 
         <button @click="generateTitle(title)"> Generate </button>
-      </li>
+      </li> -->
     </div>
 
-    <ul>
+    <ul class="listTitles">
       <li 
         v-for="title in titlesList" 
         :key="title.id"
+        class="title"
         >
 
-        {{ title.id }} - 
-        {{ title.title }} - 
-        {{ title.plot }} 
+        <div class="thumbnail" :style="{  'background-image': `url(${title.poster_path})`}"></div>
 
-        <div class="thumbnail">
-          <img  :src="title.poster_path" />
-        </div>
+        {{ title.title }}
 
-        {{ title.backdrop_path }}
-
-        <button @click="deleteTitle(title.id)">  Delete </button>
+        <!-- <button @click="deleteTitle(title.id)">  Delete </button> -->
       </li>
     </ul>
   </main>
