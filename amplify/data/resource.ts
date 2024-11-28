@@ -11,7 +11,9 @@ const schema = a.schema({
     .model({
       id: a.string(),
       title: a.string(),
-      plot: a.string()
+      plot: a.string(),
+      poster_path: a.string(),
+      backdrop_path: a.string()
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });

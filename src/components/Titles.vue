@@ -10,15 +10,25 @@ const client = generateClient<Schema>();
 
 // Reactive reference to store the array of titles
 const titlesList : any = ref<Array<Schema['Titles']>>([]);
-const newTitle = ref({id: '',title: '',plot: ''})
+const newTitle = ref({id: '',title: '',plot: '', poster_path:  '',  backdrop_path: ''})
 const api_result : any = ref([])
 const api_search_term : any = ref('')
+const base_image_url = "https://image.tmdb.org/t/p/w500"
 
 async function generateTitle (data: any) {
+  let poster_url = ''
+  let backdrop_url = ''
+
+  if(data.poster_path)  poster_url  = `${base_image_url +  data.poster_path}`
+  if(data.backdrop_path)  backdrop_url  = `${base_image_url +  data.backdrop_path}`
+
+
   newTitle.value = {
     id: `${data.id}`,
     title: data.title,
-    plot: data.overview
+    plot: data.overview,
+    poster_path: poster_url,
+    backdrop_path: backdrop_url
   }
 }
 
@@ -49,7 +59,7 @@ function createTitle() {
     client.models.Titles.create(newTitle.value).then(() => {
       // After creating a new title, update the list of titles
       listTitles();
-      newTitle.value = {id: '',title: '',plot: ''}
+      newTitle.value = {id: '',title: '',plot: '', poster_path:  '',  backdrop_path: ''}
     })
 }
 
@@ -67,6 +77,8 @@ onMounted(() => {
   <main>
     <h1>My Titles</h1>
     <div class="newTitle">
+
+      <h3>NEW Title</h3>
 
       <div class="field">
         <label for="title_id">ID :</label>
@@ -94,6 +106,11 @@ onMounted(() => {
       <button @click="autoGenerate">  search </button>
       {{ api_search_term }} -
       <!-- {{ api_result }} -->
+      {{  newTitle }}
+
+      <br />
+
+      <p>________________________</p>
 
       <li 
         v-for="title in api_result" 
@@ -105,8 +122,11 @@ onMounted(() => {
         {{ title.overview }} 
         {{ title }} 
 
+        <div class="thumbnail">
+          <img  :src="`${base_image_url + title.poster_path}`" />
+        </div>
 
-        <img  :src="`https://image.tmdb.org/t/p/w500${title.poster_path}`" />
+        
         <img  :src="`https://image.tmdb.org/t/p/w500${title.backdrop_path}`" />
 
 
@@ -123,6 +143,12 @@ onMounted(() => {
         {{ title.id }} - 
         {{ title.title }} - 
         {{ title.plot }} 
+
+        <div class="thumbnail">
+          <img  :src="title.poster_path" />
+        </div>
+
+        {{ title.backdrop_path }}
 
         <button @click="deleteTitle(title.id)">  Delete </button>
       </li>
