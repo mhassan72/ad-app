@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "aws-amplify": "^6.6.6",
+    "axios": "^1.7.8",
     "vue": "^3.4.21"
   },
   "devDependencies": {
@@ -20,6 +21,7 @@
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/cli-plugin-router": "~5.0.0",
     "@vue/tsconfig": "^0.5.1",
     "aws-cdk": "^2.137.0",
     "aws-cdk-lib": "^2.137.0",

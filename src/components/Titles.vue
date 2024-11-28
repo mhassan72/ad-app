@@ -3,16 +3,39 @@ import '@/assets/main.css';
 import { onMounted, ref } from 'vue';
 import type { Schema } from '../../amplify/data/resource';
 import { generateClient } from 'aws-amplify/data';
+import axios from 'axios';
+
 
 const client = generateClient<Schema>();
 
 // Reactive reference to store the array of titles
-const titlesList : any   = ref<Array<Schema['Titles']>>([]);
-const newTitle  =   ref({
-  id: '',
-  title: '',
-  plot: ''
-})
+const titlesList : any = ref<Array<Schema['Titles']>>([]);
+const newTitle = ref({id: '',title: '',plot: ''})
+const api_result : any = ref([])
+const api_search_term : any = ref('')
+
+async function generateTitle (data: any) {
+  newTitle.value = {
+    id: `${data.id}`,
+    title: data.title,
+    plot: data.overview
+  }
+}
+
+function autoGenerate () {
+
+  const options = {
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/search/movie?query=${api_search_term.value}&include_adult=false&language=en-US&page=1`,
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzliYmI2ZDkyZjVmNjI3NWI5M2Y4N2EzYmNlZTE4YSIsIm5iZiI6MTczMjc2NjcyMS4yMDQ4NzE0LCJzdWIiOiI2NzQ3ZWE2NmNhYjBhMjM4ZGRkY2UyNzgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nmqpxOV7MOefEyenk7YYYc64FA2-c_rY3M7CS-f15z0'
+    }
+  };
+  axios.request(options)
+  .then((res: any) => api_result.value  = res.data.results)
+  .catch((err : any)=> console.error(err));
+}
 
 function listTitles() {
   client.models.Titles.observeQuery().subscribe({
@@ -64,6 +87,31 @@ onMounted(() => {
       <div class="action">
         <button @click="createTitle">+ Add</button>
       </div>
+    </div>
+
+    <div class="results">
+      <input type="search"  v-model="api_search_term" />
+      <button @click="autoGenerate">  search </button>
+      {{ api_search_term }} -
+      <!-- {{ api_result }} -->
+
+      <li 
+        v-for="title in api_result" 
+        :key="title.id"
+        >
+
+        {{ title.id }} - 
+        {{ title.title }} - 
+        {{ title.overview }} 
+        {{ title }} 
+
+
+        <img  :src="`https://image.tmdb.org/t/p/w500${title.poster_path}`" />
+        <img  :src="`https://image.tmdb.org/t/p/w500${title.backdrop_path}`" />
+
+
+        <button @click="generateTitle(title)"> Generate </button>
+      </li>
     </div>
 
     <ul>
