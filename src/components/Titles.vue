@@ -54,7 +54,9 @@ onMounted(() => {
         :key="title.id"
         >
 
-        {{ title.title }}
+        {{ title.id }} - 
+        {{ title.title }} - 
+        {{ title.plot }} 
       </li>
     </ul>
 
