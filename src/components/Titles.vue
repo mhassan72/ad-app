@@ -125,11 +125,13 @@ onMounted(() => {
           class="title"
           >
           <div class="thumbnail" :style="{  'background-image': `url(${base_image_url + title.poster_path})`}"></div>  
-          {{ truncate(title.title, 3) }}
+          <p class="item_title">{{ truncate(title.title, 23) }}</p>
           <button @click="generateTitle(title)"> Generate </button>
         </li>
       </ul>
     </div>
+
+    <hr />
 
     <ul class="listTitles">
       <li 
@@ -137,13 +139,8 @@ onMounted(() => {
         :key="title.id"
         class="title"
         >
-
         <div class="thumbnail" :style="{  'background-image': `url(${title.poster_path})`}"></div>
-
-        {{ truncate(title.title, 23) }}
-        
-        <hr />
-
+        <p class="item_title">{{ truncate(title.title, 23) }}</p>
         <button @click="deleteTitle(title.id)">  Delete </button>
       </li>
     </ul>
