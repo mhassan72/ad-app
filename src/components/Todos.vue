@@ -6,46 +6,48 @@ import { generateClient } from 'aws-amplify/data';
 
 const client = generateClient<Schema>();
 
-// create a reactive reference to the array of todos
-const todos = ref<Array<Schema['Todo']["type"]>>([]);
+// Reactive reference to store the array of titles
+const titles = ref<Array<Schema['Title']>>([]);
 
-function listTodos() {
-  client.models.Todo.observeQuery().subscribe({
+function listTitles() {
+  client.models.Title.observeQuery().subscribe({
     next: ({ items, isSynced }) => {
-      todos.value = items
-     },
-  }); 
-}
-
-function createTodo() {
-  client.models.Todo.create({
-    content: window.prompt("Todo content")
-  }).then(() => {
-    // After creating a new todo, update the list of todos
-    listTodos();
+      titles.value = items;
+    },
   });
 }
-    
-// fetch todos when the component is mounted
- onMounted(() => {
-  listTodos();
-});
 
+function createTitle() {
+  const titleName = window.prompt("Enter title name:");
+  if (titleName) {
+    client.models.Title.create({
+      name: titleName, // Adjust field name based on the schema
+    }).then(() => {
+      // After creating a new title, update the list of titles
+      listTitles();
+    });
+  }
+}
+
+// Fetch titles when the component is mounted
+onMounted(() => {
+  listTitles();
+});
 </script>
 
 <template>
   <main>
-    <h1>My todos</h1>
-    <button @click="createTodo">+ new</button>
+    <h1>My Titles</h1>
+    <button @click="createTitle">+ New Title</button>
     <ul>
       <li 
-        v-for="todo in todos" 
-        :key="todo.id">
-        {{ todo.content }}
+        v-for="title in titles" 
+        :key="title.id">
+        {{ title.name }}
       </li>
     </ul>
     <div>
-      🥳 App successfully hosted. Try creating a new todo.
+      🥳 App successfully hosted. Try creating a new title.
       <br />
       <a href="https://docs.amplify.aws/gen2/start/quickstart/nextjs-pages-router/">
         Review next steps of this tutorial.
