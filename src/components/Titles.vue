@@ -43,8 +43,10 @@ onMounted(() => {
     <ul>
       <li 
         v-for="title in titlesList" 
-        :key="title.id">
-        {{ title.name }}
+        :key="title.id"
+        >
+        
+        {{ title.title }}
       </li>
     </ul>
 
