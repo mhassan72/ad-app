@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Todos from './components/Todos.vue'
+import Titles from './components/Titles.vue'
 </script>
 
 <template>
   <main>
-    <Todos />
+    <Titles />
   </main>
 </template>
 

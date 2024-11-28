@@ -47,6 +47,23 @@ onMounted(() => {
         {{ title.name }}
       </li>
     </ul>
+
+    <div class="newTitle">
+      <div class="field">
+        <label for="title">Title :</label>
+        <input type="text" id="title">
+      </div>
+      
+      <div class="field">
+        <label for="plot">Plot :</label>
+        <input type="text" id="plot">
+      </div>
+
+      <div class="action">
+        <button>Add </button>
+      </div>
+    </div>
+
     <div>
       🥳 App successfully hosted. Try creating a new title.
       <br />
