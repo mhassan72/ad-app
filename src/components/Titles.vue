@@ -8,6 +8,11 @@ const client = generateClient<Schema>();
 
 // Reactive reference to store the array of titles
 const titlesList : any   = ref<Array<Schema['Titles']>>([]);
+const newTitle  =   ref({
+  id: '43j5bn34kj5g3jh4534593847234kl13n',
+  title: '',
+  plot: ''
+})
 
 function listTitles() {
   client.models.Titles.observeQuery().subscribe({
@@ -18,16 +23,19 @@ function listTitles() {
 }
 
 function createTitle() {
-  const titleName = window.prompt("Enter title name:");
-  if (titleName) {
     client.models.Titles.create({
-      id: '12345',
-      title: titleName, // Adjust field name based on the schema
+      id: newTitle.value.id,
+      title: newTitle.value.title, // Adjust field name based on the schema
+      plot: newTitle.value.plot,
     }).then(() => {
       // After creating a new title, update the list of titles
       listTitles();
+      newTitle.value = {
+        id: '',
+        title: '',
+        plot: ''
+      }
     });
-  }
 }
 
 // Fetch titles when the component is mounted
@@ -45,7 +53,7 @@ onMounted(() => {
         v-for="title in titlesList" 
         :key="title.id"
         >
-        
+
         {{ title.title }}
       </li>
     </ul>
@@ -53,16 +61,16 @@ onMounted(() => {
     <div class="newTitle">
       <div class="field">
         <label for="title">Title :</label>
-        <input type="text" id="title">
+        <input type="text" id="title" v-model="newTitle.title">
       </div>
       
       <div class="field">
         <label for="plot">Plot :</label>
-        <input type="text" id="plot">
+        <input type="text" id="plot" v-model="newTitle.plot">
       </div>
 
       <div class="action">
-        <button>Add </button>
+        <button @click="createTitle()">Add </button>
       </div>
     </div>
 

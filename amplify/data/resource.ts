@@ -10,7 +10,8 @@ const schema = a.schema({
   Titles: a
     .model({
       id: a.string(),
-      title: a.string()
+      title: a.string(),
+      plot: a.string()
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
