@@ -12,6 +12,7 @@ ul, li {
 
 .title {
     width: 104px;
+    max-height: 260px;
 }
 
 .title .thumbnail {
@@ -19,7 +20,6 @@ ul, li {
     margin: 0;
     width: 100px;
     height: 150px;
-    border: 2px solid rgba(12, 12, 12, 0.066);
     border-radius: 3px;
     overflow: hidden;
     background-position: center;

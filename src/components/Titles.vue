@@ -156,8 +156,9 @@ onMounted(() => {
         <div class="thumbnail" :style="{  'background-image': `url(${title.poster_path})`}"></div>
 
         {{ title.title }}
+        <hr />
 
-        <!-- <button @click="deleteTitle(title.id)">  Delete </button> -->
+        <button @click="deleteTitle(title.id)">  Delete </button>
       </li>
     </ul>
   </main>
