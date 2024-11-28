@@ -7,12 +7,12 @@ import { generateClient } from 'aws-amplify/data';
 const client = generateClient<Schema>();
 
 // Reactive reference to store the array of titles
-const titles = ref<Array<Schema['Title']>>([]);
+const titlesList : any   = ref<Array<Schema['Titles']>>([]);
 
 function listTitles() {
-  client.models.Title.observeQuery().subscribe({
+  client.models.Titles.observeQuery().subscribe({
     next: ({ items, isSynced }) => {
-      titles.value = items;
+      titlesList.value = items;
     },
   });
 }
@@ -20,8 +20,9 @@ function listTitles() {
 function createTitle() {
   const titleName = window.prompt("Enter title name:");
   if (titleName) {
-    client.models.Title.create({
-      name: titleName, // Adjust field name based on the schema
+    client.models.Titles.create({
+      id: '12345',
+      title: titleName, // Adjust field name based on the schema
     }).then(() => {
       // After creating a new title, update the list of titles
       listTitles();
@@ -41,7 +42,7 @@ onMounted(() => {
     <button @click="createTitle">+ New Title</button>
     <ul>
       <li 
-        v-for="title in titles" 
+        v-for="title in titlesList" 
         :key="title.id">
         {{ title.name }}
       </li>
