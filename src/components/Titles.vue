@@ -113,8 +113,6 @@ onMounted(() => {
       <input type="search"  v-model="api_search_term" />
       <button @click="autoGenerate">  search </button>
       {{ api_search_term }} -
-      <!-- {{ api_result }} -->
-      <!-- {{  newTitle }} -->
 
       <br />
 
@@ -131,27 +129,6 @@ onMounted(() => {
           <button @click="generateTitle(title)"> Generate </button>
         </li>
       </ul>
-
-      <!-- <li 
-        v-for="title in api_result" 
-        :key="title.id"
-        >
-
-        {{ title.id }} - 
-        {{ title.title }} - 
-        {{ title.overview }} 
-        {{ title }} 
-
-        <div class="thumbnail">
-          <img  :src="`${base_image_url + title.poster_path}`" />
-        </div>
-
-        
-        <img  :src="`https://image.tmdb.org/t/p/w500${title.backdrop_path}`" />
-
-
-        <button @click="generateTitle(title)"> Generate </button>
-      </li> -->
     </div>
 
     <ul class="listTitles">
