@@ -22,7 +22,7 @@ export const titleStage= ref<StageTypes>({
   search_results: true,
   search_bar: true,
   title_list: true,
-  forum: true,
+  forum: false,
   loading: {
     search_results: false,
     new_title: false,

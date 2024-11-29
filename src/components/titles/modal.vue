@@ -20,8 +20,9 @@ function generate () {
     closeModal()
     titleStage.value.search_results  = false
     titleStage.value.search_bar =  true
+    titleStage.value.forum = true
+    titleStage.value.title_list = false
 }
-
 </script>
 
 <template>

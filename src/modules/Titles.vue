@@ -14,13 +14,13 @@ onMounted(() => {
 
 <template>
   <main>
-    <h1>My Titles</h1>
+    <h1>New Title</h1>
     
     <TitleNew v-if="titleStage.forum"  />
     <hr />
     <TitleSearch v-if="titleStage.search_bar" />
     <hr />
-    <TitleList  />
+    <TitleList v-if="titleStage.title_list" />
 
   </main>
 </template>

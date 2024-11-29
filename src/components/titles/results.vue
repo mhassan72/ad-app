@@ -24,6 +24,7 @@ onMounted(() => {
 </script>
 <template>
 <div class="search_results">
+  <label> Search for the Title in order to auto fetch...</label>
   <div class="searchform">
     <input type="search" class="search_bar" v-model="api_search_term" />
     <button class="cbtn" @click="autoGenerate">  search </button>
