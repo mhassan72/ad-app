@@ -2,6 +2,31 @@
     font-family: sans-serif;
 }
 
+.search_results .searchform  {
+    background: rgba(160, 160, 160, 0.537);
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+
+}
+
+.search_results .searchform .cbtn {
+    background: rgba(196, 196, 196, 0.476);
+    border-radius: 50px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 3px solid rgba(0, 0, 0, 0.321);
+}
+.search_results .search_bar {
+    background: none;
+    border: none;
+    padding: 6px;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
 .search_results  .search_results_list {
     padding: 0;
     margin: 0;
@@ -59,3 +84,4 @@
     padding: 0;
     margin: 0;
 }
+

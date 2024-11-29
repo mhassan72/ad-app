@@ -18,7 +18,7 @@ onMounted(() => {
     
     <TitleNew v-if="titleStage.forum"  />
     <hr />
-    <TitleSearch v-if="titleStage.search_results" />
+    <TitleSearch v-if="titleStage.search_bar" />
     <hr />
     <TitleList  />
 

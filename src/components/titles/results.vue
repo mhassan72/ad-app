@@ -5,7 +5,8 @@ import {
   api_result, 
   api_search_term, 
   base_image_url,
-  currentSearchModal
+  currentSearchModal,
+  titleStage
 } from '@/stores/title_model'
 import {  truncate } from '@/helpers/shared_helper'
 import { autoGenerate }  from '@/api/tmdb'
@@ -23,12 +24,15 @@ onMounted(() => {
 </script>
 <template>
 <div class="search_results">
-    <input type="search"  v-model="api_search_term" />
-    <button @click="autoGenerate">  search </button>
-    {{ api_search_term }} -
-    <strong>Results</strong>
+  <div class="searchform">
+    <input type="search" class="search_bar" v-model="api_search_term" />
+    <button class="cbtn" @click="autoGenerate">  search </button>
+  </div>
+  
+    <strong>Search Results for  : {{ api_search_term }} </strong>
 
-    <ul class="search_results_list">
+
+    <ul class="search_results_list"  v-if="titleStage.search_results">
         <li v-for="title in api_result" :key="title.id" class="title" @click="setTitle(title)">
           <div class="thumbnail" :style="{  'background-image': `url(${base_image_url + title.poster_path})`}"></div>  
           

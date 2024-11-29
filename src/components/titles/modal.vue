@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import '@/assets/titles/modal.css';
 import { defineProps, computed } from 'vue'
-import { base_image_url, currentSearchModal, generateTitle } from '@/stores/title_model'
+import { base_image_url, currentSearchModal, generateTitle, titleStage } from '@/stores/title_model'
 
 const props = defineProps<{ data: any }>();
 
@@ -18,6 +18,8 @@ function closeModal () {
 function generate () {
     generateTitle(currentSearchModal.value)
     closeModal()
+    titleStage.value.search_results  = false
+    titleStage.value.search_bar =  true
 }
 
 </script>
