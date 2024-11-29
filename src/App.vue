@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Titles from './components/Titles.vue'
+// import Titles from './modules/Titles.vue'
 </script>
 
 <template>
-  <main>
-    <Titles />
-  </main>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
