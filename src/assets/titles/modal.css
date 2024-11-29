@@ -1,0 +1,65 @@
+.modal {
+    background: white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+}
+.modal .btn-close {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+.modal .cover {
+    background: rgba(0, 0, 0, 0.104);
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.black_fill {
+    background: #0000004c;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+
+}
+
+.modal .poster {
+    min-width: 100px;
+    height: 150px;
+    background: rgba(12, 12, 12, 0.062);
+    margin-top: -60px;
+    margin-left: 10px;
+    border-radius: 6px;
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.modal .context  {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.modal .context .content_title h4 {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 6px;
+}
+
+.modal .content_original_title {
+    color: rgb(101, 101, 101)
+}
+
+.modal .content_plot {
+    padding: 10px;
+    font-weight: 300;
+    font-size: 1.1rem;
+}

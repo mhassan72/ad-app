@@ -1,4 +1,4 @@
-ul, li {
+.listTitles ul, .listTitles li {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -10,18 +10,18 @@ ul, li {
     overflow: scroll;
 }
 
-.title {
+.listTitles  .title {
     width: 104px;
     max-height: 260px;
 }
 
-.item_title {
+.listTitles .item_title {
     font-size: 0.8rem;
     padding: 0;
     margin: 0;
 }
 
-.title .thumbnail {
+.listTitles .title .thumbnail {
     padding: 0;
     margin: 0;
     width: 100px;

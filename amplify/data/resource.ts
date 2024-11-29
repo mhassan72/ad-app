@@ -13,7 +13,8 @@ const schema = a.schema({
       title: a.string(),
       plot: a.string(),
       poster_path: a.string(),
-      backdrop_path: a.string()
+      backdrop_path: a.string(),
+      year: a.string()
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });

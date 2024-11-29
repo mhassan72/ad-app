@@ -1,12 +1,12 @@
 import { titlesList, newTitle } from '../stores/title_model'
 import type { Schema } from '../../amplify/data/resource';
 import { generateClient } from 'aws-amplify/data';
-  
+
 const client = generateClient<Schema>();
 
 export function listTitles() {
   client.models.Titles.observeQuery().subscribe({
-    next: ({ items, isSynced }) => {
+    next: ({ items }) => {
       titlesList.value = items;
     },
   });

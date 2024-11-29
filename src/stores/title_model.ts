@@ -1,14 +1,36 @@
 // Import Dependencies
 import { ref } from 'vue'
 import type { Schema } from '../../amplify/data/resource';
-
+import type { StageTypes } from  '@/types/title_types'
 // Title satte mangament here
 // Reactive reference to store the array of titles
 export const titlesList : any = ref<Array<Schema['Titles']>>([]);
-export const newTitle = ref({id: '',title: '',plot: '', poster_path:  '',  backdrop_path: ''})
+
+export const newTitle = ref({
+  id: '',
+  title: '',
+  plot: '', 
+  poster_path:  '',  
+  backdrop_path: ''
+})
+
 export const api_result : any = ref([])
 export const api_search_term : any = ref('')
 export const base_image_url = "https://image.tmdb.org/t/p/w500"
+
+export const titleStage= ref<StageTypes>({
+  search_results: true,
+  search_bar: true,
+  title_list: true,
+  forum: true,
+  loading: {
+    search_results: false,
+    new_title: false,
+    generate: false
+  }
+})
+
+export const currentSearchModal = ref<any>({})
 
 
 export async function generateTitle (data: any) {

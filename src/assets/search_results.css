@@ -1,0 +1,61 @@
+.search_results {
+    font-family: sans-serif;
+}
+
+.search_results  .search_results_list {
+    padding: 0;
+    margin: 0;
+}
+.search_results  .search_results_list .title   {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: self-start;
+    border-bottom: 1px solid #00000012;
+}
+.search_results  .search_results_list .title .thumbnail {
+    width: 120px;
+    height: 150px;
+    background-size: cover;
+    border-radius: 6px;
+}
+
+.search_results  .search_results_list .title .context {
+    width: 100%;
+    padding: 6px;
+    padding-left: 10px;
+}
+
+.search_results  .search_results_list .title .context .meta_data {
+    border-top: 1px solid #00000012;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+}
+
+.search_results  .search_results_list .title .context .meta_data .col {
+    font-weight: 600;
+    text-align: right;
+
+}
+
+.search_results  .search_results_list .title .context .meta_data .col:last-child {
+    background: rgba(250, 94, 94, 0.153);
+    margin-right: 10px;
+    padding: 6px;
+    border-radius: 6px;
+    line-height: 1.3rem;
+}
+
+.search_results  .search_results_list .title .context .meta_data .col label{
+    font-weight: 300;
+}
+
+.search_results  .search_results_list .title h3,
+.search_results  .search_results_list .title p {
+    padding: 0;
+    margin: 0;
+}
