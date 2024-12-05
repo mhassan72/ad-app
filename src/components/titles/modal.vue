@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import '@/assets/titles/modal.css';
-import { defineProps, computed } from 'vue'
-import { base_image_url, currentSearchModal, generateTitle, titleStage } from '@/stores/title_model'
+import { defineProps } from 'vue'
+import { 
+    base_image_url, 
+    currentSearchModal, 
+    generateTitle, 
+    titleStage,
+    newTitle
+} from '@/stores/title_model'
+import {fetchDetails } from '@/api/tmdb'
 
 const props = defineProps<{ data: any }>();
 
 currentSearchModal.value = props.data
-
-const  modal_open = computed(() => {
-    return  currentSearchModal.value.id == props.data.id
-})
 
 function closeModal () {
     currentSearchModal.value.modal = false
@@ -23,6 +26,7 @@ function generate () {
     titleStage.value.forum = true
     titleStage.value.title_list = false
 }
+
 </script>
 
 <template>
@@ -50,6 +54,8 @@ function generate () {
         {{  data.overview }}
     </div>
 
+    <button  @click="fetchDetails(data.id)">Gett Details</button>
+
 
 
     <!-- <h1>Modal</h1>
@@ -58,6 +64,8 @@ function generate () {
     {{ currentSearchModal.id }}
 
     {{  data  }} -->
+
+    {{ newTitle.crew }}
 
     <button @click="generate"> Generate </button>
 

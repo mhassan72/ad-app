@@ -1,17 +1,30 @@
 // Import Dependencies
 import { ref } from 'vue'
 import type { Schema } from '../../amplify/data/resource';
-import type { StageTypes } from  '@/types/title_types'
+import type { StageTypes} from '@/types/title_types'
 // Title satte mangament here
 // Reactive reference to store the array of titles
 export const titlesList : any = ref<Array<Schema['Titles']>>([]);
 
-export const newTitle = ref({
+export const currentTitle = ref({
   id: '',
   title: '',
   plot: '', 
   poster_path:  '',  
-  backdrop_path: ''
+  backdrop_path: '',
+  cast: [],
+  crew: [],
+  publish: false
+});
+
+export const newTitle = ref<any>({
+  id: '',
+  title: '',
+  plot: '', 
+  poster_path:  '',  
+  backdrop_path: '',
+  cast: [],
+  crew: []
 })
 
 export const api_result : any = ref([])
@@ -46,6 +59,8 @@ export async function generateTitle (data: any) {
     title: data.title,
     plot: data.overview,
     poster_path: poster_url,
-    backdrop_path: backdrop_url
+    backdrop_path: backdrop_url,
+    cast: data.cast,
+    crew: data.crew
   }
 }

@@ -11,3 +11,23 @@ export interface StageTypes {
     forum: boolean;
     loading: LoadingState;
 }
+
+export interface TitleMember {
+    id: string,
+    title: string,
+    plot: string, 
+    poster_path:  string,  
+    backdrop_path: string,
+    cast: CastMember[],
+    crew: CrewMember[]
+}
+
+export interface CastMember {
+    name: string;
+    character: string;
+}
+  
+export interface CrewMember {
+    name: string;
+    job: string;
+}

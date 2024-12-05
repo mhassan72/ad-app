@@ -1,0 +1,49 @@
+.page_title .cast {
+    display: flex;
+    gap: 3px;
+    overflow-y: scroll;
+}
+
+
+.page_title  .cast  .item {
+    min-width: 100px;
+    min-height: 150px;
+    text-align: left;
+    font-family: sans-serif;
+}
+
+.page_title .cast  .item p {
+    padding: 0;
+    margin: 0;
+}
+
+.page_title .cast  .item .avatar {
+    background: gray;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.page_title .cast  .item .context small {
+    color: #576574;
+}
+
+.page_title .header {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.page_title .header label {
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #222f3e;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+.page_title .avatarTitle {
+    width: 100px;
+}
