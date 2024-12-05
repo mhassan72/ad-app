@@ -4,6 +4,7 @@ import {
   api_search_term, 
   titleStage,
   newTitle,
+  currentTitle,
   base_image_url
 } from '../stores/title_model'
 import { client } from '@/model/title';
@@ -42,6 +43,24 @@ export function fetchDetails (id: string) {
   .request(options)
   .then(res => {
     addToData(res, id)
+    console.log(res)
+  })
+  .catch(err => console.error(err));
+}
+
+export function getGenres(id: string) {
+  const options = {
+    method: 'GET',
+    url: `${API_BASE_URL}/movie/${id}?language=en-US`,
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${API_KEY}`,
+    }
+  }
+
+  axios(options)
+  .then(res => {
+    currentTitle.value.genres = res.data.genres.map((genre: { id: number; name: string }) => genre.name)
   })
   .catch(err => console.error(err));
 }

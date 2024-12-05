@@ -15,7 +15,8 @@ const schema = a.schema({
       backdrop_path: a.string(),
       year: a.string(),
       cast: a.string().array(),
-      crew: a.string().array()
+      crew: a.string().array(),
+      genres: a.string().array()
     }).authorization((allow) => [allow.publicApiKey()]),
 });
 

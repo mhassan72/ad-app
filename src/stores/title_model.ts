@@ -14,7 +14,8 @@ export const currentTitle = ref({
   backdrop_path: '',
   cast: [],
   crew: [],
-  publish: false
+  publish: false,
+  genres: []
 });
 
 export const newTitle = ref<any>({
@@ -24,7 +25,8 @@ export const newTitle = ref<any>({
   poster_path:  '',  
   backdrop_path: '',
   cast: [],
-  crew: []
+  crew: [],
+  genres: []
 })
 
 export const api_result : any = ref([])

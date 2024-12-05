@@ -47,3 +47,17 @@
 .page_title .avatarTitle {
     width: 100px;
 }
+
+
+.page_title .title {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+}
+
+
+.page_title .title img {
+    max-width: 100px;
+    max-height: 150px;
+    border-radius: 4px;
+}

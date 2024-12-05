@@ -1,24 +1,30 @@
 <template>
     <div class="page_title">
-        <h1>Title</h1>
         {{  route.params.title_id }}
-        <button @click="update()">update</button>
-        <button  @click="fetchDetails(`${route.params.title_id}`)">Get Cast and Crew</button>
-
         <div class="title">
-            <h1>
-                {{ currentTitle.title }}
-            </h1>
-            <p>
-                {{ currentTitle.plot }}
-            </p>
             <img class="avatarTitle" :src="currentTitle.poster_path" alt="">
+
+
+            <div class="context">
+                <h1>
+                    {{ currentTitle.title }}
+                </h1>
+                <p>
+                    {{ currentTitle.plot }}
+                </p>
+            </div>
+            
         </div>
 
 
         <div class="header">
             <label> Cast</label>
+            <button @click="update()">update</button>
+            <button  @click="fetchDetails(`${route.params.title_id}`)">Get Cast and Crew</button>
         </div>
+
+        Genres: {{currentTitle.genres }}
+
 
         <div class="cast">
             <div v-for="(item, index) in castParsedArray" :key="index" >
@@ -74,7 +80,7 @@
 import '@/assets/titles/cast.css';
 import { useRoute }  from 'vue-router'
 import { getTitle, updateTitle } from '@/model/title'
-import {fetchDetails } from '@/api/tmdb'
+import {fetchDetails, getGenres } from '@/api/tmdb'
 import { newTitle, currentTitle } from '@/stores/title_model';
 import { onMounted, ref } from 'vue';
 
@@ -120,11 +126,14 @@ async function update ()  {
     currentTitle.value.crew = newTitle.value.crew
     updateTitle(currentTitle.value)
     .then((response) => console.log(response))
+
+    await getTitle(id)
 }
 
 onMounted(async () => {
     await getTitle(id)
     convertToJson(currentTitle.value.crew, crewParsedArray )
     convertToJson(currentTitle.value.cast, castParsedArray )
+    getGenres(id)
 })
 </script>
