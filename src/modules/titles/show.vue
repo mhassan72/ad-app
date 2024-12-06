@@ -109,6 +109,7 @@ const handleUpload = async () => {
 
   fileReader.onload = async (event) => {
     const result = event.target?.result as ArrayBuffer | null;
+
     if (!result) {
       console.error('Failed to read file');
       return;
@@ -117,9 +118,19 @@ const handleUpload = async () => {
     console.log('File read successfully:', result);
 
     try {
-      await uploadData({
+      uploadData({
         data: result,
-        path: file.name,
+        path: `media/video/${file.name}`,
+        options: {
+        onProgress: ({ transferredBytes, totalBytes }) => {
+            if (totalBytes) {
+                console.log(
+                    `Upload progress ${Math.round(
+                        (transferredBytes / totalBytes) * 100
+                    )} %`);
+                }
+            }
+        }
       });
       console.log('File uploaded successfully');
     } catch (error) {
