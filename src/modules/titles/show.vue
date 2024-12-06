@@ -70,6 +70,14 @@
             </div>
         </div>
 
+
+        <!-- Upload Videos -->
+         <div class="video_upload">
+            <label for="fileUploader">Upload</label>
+            <input id="fileUploader" type="file" ref="fileInput">
+            <button @click="handleUpload"> Upload file </button>
+         </div>
+
         <!-- {{ castParsedArray }} {{ crewParsedArray }} -->
 
 
@@ -82,10 +90,47 @@ import { useRoute }  from 'vue-router'
 import { getTitle, updateTitle } from '@/model/title'
 import {fetchDetails, getGenres } from '@/api/tmdb'
 import { newTitle, currentTitle } from '@/stores/title_model';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
+import { uploadData } from "aws-amplify/storage";
 
 const route = useRoute()
 const id : string = route.params.title_id.toString()
+const fileInput = ref<HTMLInputElement | null>(null);
+
+const handleUpload = async () => {
+  const file = fileInput.value?.files?.[0];
+  if (!file) {
+    console.error('No file selected');
+    return;
+  }
+
+  const fileReader = new FileReader();
+  fileReader.readAsArrayBuffer(file);
+
+  fileReader.onload = async (event) => {
+    const result = event.target?.result as ArrayBuffer | null;
+    if (!result) {
+      console.error('Failed to read file');
+      return;
+    }
+
+    console.log('File read successfully:', result);
+
+    try {
+      await uploadData({
+        data: result,
+        path: file.name,
+      });
+      console.log('File uploaded successfully');
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
+  fileReader.onerror = () => {
+    console.error('Error reading file:', fileReader.error);
+  };
+};
 
 // Parsed array of JSON objects
 const castParsedArray = ref<Array<{ titleId: number; name: string; role: string; profile_path: string }>>([]);
