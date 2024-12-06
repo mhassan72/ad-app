@@ -1,0 +1,40 @@
+.navBarplaceholder .navTop {
+    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 6px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.19);
+    font-family: sans-serif;
+    align-items: center;
+}
+
+.navBarplaceholder  {
+    height: 60px;
+    width: 100%;
+    color: #222f3e;
+}
+
+.navBarplaceholder .navTop h1 {
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.navBarplaceholder .navTop .btnClear {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navBarplaceholder .navTop .btnClear:hover {
+    color: #576574;
+}

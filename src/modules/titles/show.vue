@@ -1,17 +1,21 @@
 <template>
     <div class="page_title">
-        {{  route.params.title_id }}
+        <!-- :key="route.params.title_id"> -->
+        <HeaderNav :title="currentTitle.title" />
         <div class="title">
             <img class="avatarTitle" :src="currentTitle.poster_path" alt="">
 
 
             <div class="context">
-                <h1>
-                    {{ currentTitle.title }}
-                </h1>
                 <p>
                     {{ currentTitle.plot }}
                 </p>
+
+                <div class="genres">
+                    <span class="item" v-for="(item, index) in currentTitle.genres" :key="index">
+                        {{ item }}
+                    </span>
+                </div>
             </div>
             
         </div>
@@ -22,8 +26,6 @@
             <button @click="update()">update</button>
             <button  @click="fetchDetails(`${route.params.title_id}`)">Get Cast and Crew</button>
         </div>
-
-        Genres: {{currentTitle.genres }}
 
 
         <div class="cast">
@@ -95,6 +97,9 @@
 <script setup lang="ts">
 import '@/assets/titles/cast.css';
 import { useRoute }  from 'vue-router'
+
+import HeaderNav from '@/components/nav/top.vue'
+
 import { getTitle, updateTitle } from '@/model/title'
 import {fetchDetails, getGenres } from '@/api/tmdb'
 import { newTitle, currentTitle } from '@/stores/title_model';
@@ -206,6 +211,7 @@ async function convertToJson(arrayVal: any, model: any) {
 
 
 async function update ()  {
+    // fetchDetails(route.params.title_id.toString())
     currentTitle.value.id = id.toString()
     currentTitle.value.cast = newTitle.value.cast
     currentTitle.value.crew = newTitle.value.crew

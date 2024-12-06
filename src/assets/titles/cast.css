@@ -1,3 +1,7 @@
+.page_title {
+    font-family: sans-serif;
+    color: #222f3e;
+}
 .page_title .cast {
     display: flex;
     gap: 3px;
@@ -62,7 +66,7 @@
     border-radius: 4px;
 }
 
-.uploadProgressBar {
+.page_title .uploadProgressBar {
     background: #c8d6e58b;
     width: 100vw;
     height: 10px;
@@ -70,9 +74,27 @@
     bottom: 0;
     right: 0;
 }
-.uploadProgressBar  .progress {
+
+.page_title .uploadProgressBar  .progress {
     background: #5f27cd;
     width: 90%;
     height: 100%;
     border-radius: 6px;
+}
+
+.page_title .genres {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    align-items: center;
+    overflow: auto;
+}
+
+.page_title .genres .item {
+    background: #222f3e0c;
+    border-radius: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding: 4px;
 }
