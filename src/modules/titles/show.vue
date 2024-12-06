@@ -79,9 +79,9 @@
          </div>
 
         <!-- {{ castParsedArray }} {{ crewParsedArray }} -->
-          {{ uploaded  }}
+          {{ currentTitle.video  }}
 
-          <video v-if="uploaded.progress == 100" >
+          <video v-if="uploaded.progress == 100" controls>
             <source :src="uploaded.signed_url">
 
           </video>
@@ -127,22 +127,28 @@ const handleUpload = async () => {
     console.log('File read successfully:', result);
 
     try {
-      uploadData({
-        data: result,
-        path: `media/video/${file.name}`,
-        options: {
-            onProgress: ({ transferredBytes, totalBytes }) => {
-                if (totalBytes) {
-                    uploaded.value.progress =  Math.round((transferredBytes / totalBytes) * 100)
+        uploadData({
+            data: result,
+            path: `media/video/${file.name}`,
+            options: {
+                onProgress: ({ transferredBytes, totalBytes }) => {
+                    if (totalBytes) {
+                        uploaded.value.progress =  Math.round((transferredBytes / totalBytes) * 100)
+                    }
                 }
             }
-        }
-      });
+        })
 
-      const linkToStorageFile = await getUrl({path: `media/video/${file.name}`,})
-    //   console.log('File uploaded successfully', linkToStorageFile);
-      uploaded.value.signed_url  = linkToStorageFile.url
-      uploaded.value.url_exp = linkToStorageFile.expiresAt
+        const linkToStorageFile = await getUrl({path: `media/video/${file.name}`,})
+        uploaded.value.signed_url  = linkToStorageFile.url  
+        uploaded.value.url_exp = linkToStorageFile.expiresAt
+
+        currentTitle.value.video = {
+            source_url: uploaded.value.signed_url,
+            url_exp: uploaded.value.url_exp ,
+            file_name: file.name,
+            file_path: `media/video/${file.name}`,
+        }
 
     //   console.log('signed URL: ', linkToStorageFile.url)
     //   console.log('URL expires at: ', linkToStorageFile.expiresAt);

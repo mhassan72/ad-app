@@ -15,7 +15,8 @@ export const currentTitle = ref({
   cast: [],
   crew: [],
   publish: false,
-  genres: []
+  genres: [],
+  video: {}
 });
 
 export const newTitle = ref<any>({
