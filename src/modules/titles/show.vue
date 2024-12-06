@@ -83,7 +83,6 @@
 
           <video v-if="uploaded.progress == 100" controls>
             <source :src="uploaded.signed_url">
-
           </video>
 
 
@@ -150,8 +149,8 @@ const handleUpload = async () => {
             file_path: `media/video/${file.name}`,
         }
 
-    //   console.log('signed URL: ', linkToStorageFile.url)
-    //   console.log('URL expires at: ', linkToStorageFile.expiresAt);
+        updateTitle(currentTitle.value)
+        await getTitle(id)
       
     } catch (error) {
       console.error('Error uploading file:', error);

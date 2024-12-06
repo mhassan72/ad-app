@@ -16,7 +16,13 @@ const schema = a.schema({
       year: a.string(),
       cast: a.string().array(),
       crew: a.string().array(),
-      genres: a.string().array()
+      genres: a.string().array(),
+      video: a.customType({
+        source_url: a.string(),
+        url_exp: a.string() ,
+        file_name: a.string(),
+        file_path: a.string(),
+      })
     }).authorization((allow) => [allow.publicApiKey()]),
 });
 
