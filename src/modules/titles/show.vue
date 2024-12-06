@@ -72,18 +72,22 @@
 
 
         <!-- Upload Videos -->
-         <div class="video_upload">
+         <div class="video_upload" v-if="!uploadProgress">
             <label for="fileUploader">Upload</label>
             <input id="fileUploader" type="file" ref="fileInput">
             <button @click="handleUpload"> Upload file </button>
          </div>
 
         <!-- {{ castParsedArray }} {{ crewParsedArray }} -->
-          {{ currentTitle.video  }}
+          <!-- {{ currentTitle.video  }} -->
 
           <video v-if="currentTitle.video" controls>
             <source :src="currentTitle.video.source_url">
           </video>
+
+          <div class="uploadProgressBar" v-if="uploadProgress">
+            <div class="progress" :style="{ 'width': `${uploaded.progress}%`}"></div>
+          </div>
 
 
     </div>
@@ -100,12 +104,14 @@ import { uploadData, getUrl } from "aws-amplify/storage";
 const route = useRoute()
 const id : string = route.params.title_id.toString()
 const fileInput = ref<HTMLInputElement | null>(null);
+const uploadProgress = ref(false);
 const uploaded : any = ref({
     signed_url: '',
     url_exp: '',
     progress: 0
 })
 const handleUpload = async () => {
+    uploadProgress.value = true
   const file = fileInput.value?.files?.[0];
   if (!file) {
     console.error('No file selected');
@@ -151,11 +157,14 @@ const handleUpload = async () => {
         }
 
         updateTitle(currentTitle.value)
+        uploadProgress.value = false
         await getTitle(id)
       
     } catch (error) {
-      console.error('Error uploading file:', error);
+        uploadProgress.value = false
+        console.error('Error uploading file:', error);
     }
+
   };
 
   fileReader.onerror = () => {
