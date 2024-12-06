@@ -79,7 +79,12 @@
          </div>
 
         <!-- {{ castParsedArray }} {{ crewParsedArray }} -->
+          {{ uploaded  }}
 
+          <video v-if="uploaded.progress == 100" >
+            <source :src="uploaded.signed_url">
+
+          </video>
 
 
     </div>
@@ -90,13 +95,17 @@ import { useRoute }  from 'vue-router'
 import { getTitle, updateTitle } from '@/model/title'
 import {fetchDetails, getGenres } from '@/api/tmdb'
 import { newTitle, currentTitle } from '@/stores/title_model';
-import { onMounted, ref, computed } from 'vue';
-import { uploadData } from "aws-amplify/storage";
+import { onMounted, ref } from 'vue';
+import { uploadData, getUrl } from "aws-amplify/storage";
 
 const route = useRoute()
 const id : string = route.params.title_id.toString()
 const fileInput = ref<HTMLInputElement | null>(null);
-
+const uploaded : any = ref({
+    signed_url: '',
+    url_exp: '',
+    progress: 0
+})
 const handleUpload = async () => {
   const file = fileInput.value?.files?.[0];
   if (!file) {
@@ -122,17 +131,22 @@ const handleUpload = async () => {
         data: result,
         path: `media/video/${file.name}`,
         options: {
-        onProgress: ({ transferredBytes, totalBytes }) => {
-            if (totalBytes) {
-                console.log(
-                    `Upload progress ${Math.round(
-                        (transferredBytes / totalBytes) * 100
-                    )} %`);
+            onProgress: ({ transferredBytes, totalBytes }) => {
+                if (totalBytes) {
+                    uploaded.value.progress =  Math.round((transferredBytes / totalBytes) * 100)
                 }
             }
         }
       });
-      console.log('File uploaded successfully');
+
+      const linkToStorageFile = await getUrl({path: `media/video/${file.name}`,})
+    //   console.log('File uploaded successfully', linkToStorageFile);
+      uploaded.value.signed_url  = linkToStorageFile.url
+      uploaded.value.url_exp = linkToStorageFile.expiresAt
+
+    //   console.log('signed URL: ', linkToStorageFile.url)
+    //   console.log('URL expires at: ', linkToStorageFile.expiresAt);
+      
     } catch (error) {
       console.error('Error uploading file:', error);
     }
