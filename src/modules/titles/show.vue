@@ -81,8 +81,8 @@
         <!-- {{ castParsedArray }} {{ crewParsedArray }} -->
           {{ currentTitle.video  }}
 
-          <video v-if="uploaded.progress == 100" controls>
-            <source :src="uploaded.signed_url">
+          <video v-if="currentTitle.video" controls>
+            <source :src="currentTitle.video.source_url">
           </video>
 
 
@@ -147,6 +147,7 @@ const handleUpload = async () => {
             url_exp: uploaded.value.url_exp ,
             file_name: file.name,
             file_path: `media/video/${file.name}`,
+            progress:  uploaded.value.progress
         }
 
         updateTitle(currentTitle.value)

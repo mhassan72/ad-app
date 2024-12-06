@@ -16,7 +16,13 @@ export const currentTitle = ref({
   crew: [],
   publish: false,
   genres: [],
-  video: {}
+  video: { 
+    source_url: '',
+    url_exp: '' ,
+    file_name: '',
+    file_path: '',
+    progress: 0
+  }
 });
 
 export const newTitle = ref<any>({

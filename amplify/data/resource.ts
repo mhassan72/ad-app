@@ -13,6 +13,7 @@ const schema = a.schema({
       plot: a.string(),
       poster_path: a.string(),
       backdrop_path: a.string(),
+      publish: a.boolean(),
       year: a.string(),
       cast: a.string().array(),
       crew: a.string().array(),
@@ -22,6 +23,7 @@ const schema = a.schema({
         url_exp: a.string() ,
         file_name: a.string(),
         file_path: a.string(),
+        progress: a.float()
       })
     }).authorization((allow) => [allow.publicApiKey()]),
 });
