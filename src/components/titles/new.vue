@@ -4,6 +4,24 @@ import { onMounted } from 'vue';
 import { newTitle } from '../../stores/title_model'
 import { listTitles, createTitle  } from '../../model/title'
 // Fetch titles when the component is mounted
+import { useRouter, useRoute } from 'vue-router';
+
+const router = useRouter()
+
+
+
+function create () {
+  let id : any = 0
+  try {
+    id = createTitle()
+  } catch {
+    console.log("error while adding this Title")
+  }
+  finally {
+    // console.log("Finished adding details for this Title", id)
+    router.push(`/titles/${id.toString()}`)
+  }
+}
 onMounted(() => {
   listTitles();
 });
@@ -29,7 +47,7 @@ onMounted(() => {
       </div>
 
       <div class="action">
-        <button @click="createTitle">+ Add</button>
+        <button @click="create">+ Add</button>
       </div>
     </div>
 </template>

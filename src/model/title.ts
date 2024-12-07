@@ -14,26 +14,24 @@ export function listTitles() {
 
 // Create Title
 export function createTitle() {
-    client.models.Titles.create(newTitle.value)
-    .then(() => {
-      // After creating a new title, update the list of titles
-      listTitles();
-
-      console.log(newTitle.value)
-
-      newTitle.value = {
-        id: '',
-        title: '',
-        plot: '', 
-        poster_path:  '',  
-        backdrop_path: ''
-      }
-      
-      titleStage.value.search_results = false
-      titleStage.value.forum = false
-      titleStage.value.search_bar = true
-      titleStage.value.title_list = true
-    })
+  const id = newTitle.value.id
+  
+  client.models.Titles.create(newTitle.value).then(() => {
+    listTitles();    
+  }).finally(() => {
+    newTitle.value = {
+      id: '',
+      title: '',
+      plot: '', 
+      poster_path:  '',  
+      backdrop_path: ''
+    }
+    titleStage.value.search_results = false
+    titleStage.value.forum = false
+    titleStage.value.search_bar = true
+    titleStage.value.title_list = true
+  })
+  return id
 }
 
 // Get Title via ID

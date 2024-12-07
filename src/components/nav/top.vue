@@ -11,16 +11,41 @@
                 </svg>
             </button>
             <h1>{{ title }}</h1>
+            
+            <!-- <button @click="searchForTitles('Inception')">Search: Inception</button> -->
+            <button class="btnClear" @click="getMovieDetails(route.params.title_id.toString())">Auto-Gen</button>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import '@/assets/nav/top.css';
 import { defineProps } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import TMDBService from '@/services/tmdb_service'
 
 const props = defineProps<{ title: String }>();
 const router = useRouter()
+const route = useRoute()
+
+// async function searchForTitles(query: string) {
+//     try {
+//       const results = await TMDBService.searchTitles(query);
+//       console.log("Search Results:", results);
+//     } catch (error) {
+//       console.error("Error searching titles:", error);
+//     }
+// }
+
+async function getMovieDetails(movieId: string) {
+  try {
+    const details = await TMDBService.fetchDetails(movieId);
+    console.log("Movie Details:", details);
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+  } finally {
+    router.go(0)
+  }
+}
 
 function backBtn() {
     router.back()

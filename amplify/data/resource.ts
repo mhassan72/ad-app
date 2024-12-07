@@ -13,7 +13,7 @@ const schema = a.schema({
       plot: a.string(),
       poster_path: a.string(),
       backdrop_path: a.string(),
-      publish: a.boolean(),
+      publish: a.boolean().default(false),
       year: a.string(),
       cast: a.string().array(),
       crew: a.string().array(),

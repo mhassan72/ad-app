@@ -23,8 +23,8 @@
 
         <div class="header">
             <label> Cast</label>
-            <button @click="update()">update</button>
-            <button  @click="fetchDetails(`${route.params.title_id}`)">Get Cast and Crew</button>
+            <!-- <button @click="update()">update</button>
+            <button  @click="fetchDetails(`${route.params.title_id}`)">Get Cast and Crew</button> -->
         </div>
 
 
@@ -134,7 +134,7 @@ const handleUpload = async () => {
       return;
     }
 
-    console.log('File read successfully:', result);
+    // console.log('File read successfully:', result);
 
     try {
         uploadData({
@@ -203,7 +203,7 @@ async function convertToJson(arrayVal: any, model: any) {
       };
     });
 
-    console.log('Converted JSON Objects:', castParsedArray.value);
+    // console.log('Converted JSON Objects:', castParsedArray.value);
   } catch (error) {
     console.error('Error converting to JSON objects:', error);
   }
@@ -216,7 +216,7 @@ async function update ()  {
     currentTitle.value.cast = newTitle.value.cast
     currentTitle.value.crew = newTitle.value.crew
     updateTitle(currentTitle.value)
-    .then((response) => console.log(response))
+    // .then((response) => console.log(response))
 
     await getTitle(id)
 }
