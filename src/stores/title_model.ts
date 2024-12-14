@@ -9,7 +9,8 @@ export const titlesList : any = ref<Array<Schema['Titles']>>([]);
 export const currentTitle = ref({
   id: '',
   title: '',
-  plot: '', 
+  plot: '',
+  list_type:  '',
   poster_path:  '',  
   backdrop_path: '',
   cast: [],
@@ -28,6 +29,7 @@ export const currentTitle = ref({
 export const newTitle = ref<any>({
   id: '',
   title: '',
+  list_type:  '',
   plot: '', 
   poster_path:  '',  
   backdrop_path: '',

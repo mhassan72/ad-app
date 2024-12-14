@@ -10,7 +10,7 @@ const routes = [
     component: Titles,
   },
   {
-    path:'/titles/:title_id',
+    path:'/titles/:list_type/:title_id',
     name: 'ShowTitles',
     component: ShowTitle,
   }

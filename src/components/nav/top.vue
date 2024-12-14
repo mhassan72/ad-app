@@ -13,7 +13,7 @@
             <h1>{{ title }}</h1>
             
             <!-- <button @click="searchForTitles('Inception')">Search: Inception</button> -->
-            <button class="btnClear" @click="getMovieDetails(route.params.title_id.toString())">Auto-Gen</button>
+            <button class="btnClear" @click="getMovieDetails(route.params.title_id.toString(), route.params.list_type.toString())">Auto-Gen</button>
         </div>
     </div>
 </template>
@@ -21,24 +21,19 @@
 import '@/assets/nav/top.css';
 import { defineProps } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import TMDBService from '@/services/tmdb_service'
+// import TMDBService from '@/services/tmdb_service'
+import TMDBService  from '@/services/tmdb'
+import { modelDetails } from '@/stores/search'
 
 const props = defineProps<{ title: String }>();
 const router = useRouter()
 const route = useRoute()
 
-// async function searchForTitles(query: string) {
-//     try {
-//       const results = await TMDBService.searchTitles(query);
-//       console.log("Search Results:", results);
-//     } catch (error) {
-//       console.error("Error searching titles:", error);
-//     }
-// }
 
-async function getMovieDetails(movieId: string) {
+
+async function getMovieDetails(titleId: string, list_type: "movie" | "tv") {
   try {
-    const details = await TMDBService.fetchDetails(movieId);
+    const details = await TMDBService.fetchDetails(titleId, list_type);
     console.log("Movie Details:", details);
   } catch (error) {
     console.error("Error fetching movie details:", error);

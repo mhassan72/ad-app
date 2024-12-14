@@ -3,11 +3,12 @@
         <!-- :key="route.params.title_id"> -->
         <HeaderNav :title="currentTitle.title" />
         <div class="title">
+
             <img class="avatarTitle" :src="currentTitle.poster_path" alt="">
-
-
             <div class="context">
                 <p>
+                    {{ currentTitle?.vote_average }}
+                    <br  />
                     {{ currentTitle.plot }}
                 </p>
 
@@ -16,6 +17,13 @@
                         {{ item }}
                     </span>
                 </div>
+
+                <div class="genres">
+                    <span class="item">
+                        {{ currentTitle.list_type }}
+                    </span>
+                </div>
+
             </div>
             
         </div>
@@ -72,6 +80,10 @@
             </div>
         </div>
 
+        <div class="attached_media">
+            {{  currentTitle.video?.file_path  }}
+        </div>
+
 
         <!-- Upload Videos -->
          <div class="video_upload" v-if="!uploadProgress">
@@ -80,8 +92,6 @@
             <button @click="handleUpload"> Upload file </button>
          </div>
 
-        <!-- {{ castParsedArray }} {{ crewParsedArray }} -->
-          <!-- {{ currentTitle.video  }} -->
 
           <video v-if="currentTitle.video" controls>
             <source :src="currentTitle.video.source_url">
@@ -216,7 +226,7 @@ async function update ()  {
     currentTitle.value.cast = newTitle.value.cast
     currentTitle.value.crew = newTitle.value.crew
     updateTitle(currentTitle.value)
-    // .then((response) => console.log(response))
+    .then((response) => console.log(response))
 
     await getTitle(id)
 }

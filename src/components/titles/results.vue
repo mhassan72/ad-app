@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import '@/assets/search_results.css';
-import { onMounted } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { 
   api_result, 
   api_search_term, 
@@ -8,15 +8,31 @@ import {
   currentSearchModal,
   titleStage
 } from '@/stores/title_model'
+import { results } from '@/stores/search'
 import {  truncate } from '@/helpers/shared_helper'
 import { autoGenerate }  from '@/api/tmdb'
+import TMDBService from '@/services/tmdb'
 import { listTitles } from '@/model/title'
 import TitleModal from '@/components/titles/modal.vue'
+import  { modelDetails } from '@/stores/search'
+
+const sQuery : any  = reactive({ term: ''})
+
 // Fetch titles when the component is mounted
 function setTitle (val: any) {
   currentSearchModal.value = val
   currentSearchModal.value.modal = true
+
+  modelDetails.value.data = val
+  modelDetails.value.settings.modal = true
 }
+
+async function search () {
+  await TMDBService.run(sQuery.term).finally(()=>{
+    titleStage.value.search_results = true
+  })
+}
+
 
 onMounted(() => {
   listTitles();
@@ -26,21 +42,39 @@ onMounted(() => {
 <div class="search_results">
   <label> Search for the Title in order to auto fetch...</label>
   <div class="searchform">
-    <input type="search" class="search_bar" v-model="api_search_term" />
-    <button class="cbtn" @click="autoGenerate">  search </button>
+    <input type="search" class="search_bar" v-model="sQuery.term" />
+    <!-- <button class="cbtn" @click="autoGenerate"> search </button> -->
+    <button class="cbtn" @click="search"> search </button>
   </div>
+
   
-    <strong>Search Results for  : {{ api_search_term }} </strong>
+    <strong>Search Results for  : {{ sQuery.term }} </strong>
 
 
     <ul class="search_results_list"  v-if="titleStage.search_results">
-        <li v-for="title in api_result" :key="title.id" class="title" @click="setTitle(title)">
-          <div class="thumbnail" :style="{  'background-image': `url(${base_image_url + title.poster_path})`}"></div>  
+      {{ results.meta }}
+
+      <!-- <li v-for="title in results.data" :key="title.id" class="title" @click="setTitle(title)">
+        <div class="thumbnail" :style="{  'background-image': `url(${title.poster_path})`}"></div>  
+        
+        <div class="context">
+          <div class="item_title">
+            <h3>{{ title.title }}</h3>
+            <p>{{ title.plot }}</p>
+            {{title.list_type }}
+          </div>
+        
+        </div>
+        <button @click="generateTitle(title)"> Generate </button>
+      </li> -->
+
+        <li v-for="title in results.data" :key="title.id" class="title" @click="setTitle(title)">
+          <div class="thumbnail" :style="{  'background-image': `url(${title.poster_path})`}"></div>  
           
           <div class="context">
             <div class="item_title">
-              <h3>{{ truncate(title.title, 43) }}</h3>
-              <p>{{ truncate(title.overview, 100) }}</p>
+              <h3>{{ title.title }} [{{ title.list_type }}]</h3>
+              <p>{{ title?.plot }}</p>
             </div>
           
             <div class="meta_data ">

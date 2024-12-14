@@ -9,6 +9,7 @@ specifies that any user authenticated via an API key can "create", "read",
 const schema = a.schema({
   Titles: a.model({
       id: a.string(),
+      list_type: a.string().default('movie'),
       title: a.string(),
       plot: a.string(),
       poster_path: a.string(),
@@ -18,6 +19,13 @@ const schema = a.schema({
       cast: a.string().array(),
       crew: a.string().array(),
       genres: a.string().array(),
+      original_name:  a.string(),
+      original_language: a.string(),
+      origin_country: a.string(),
+      adult: a.string(),
+      popularity:  a.string(),
+      vote_average: a.string(),
+      vote_count:  a.string(),
       video: a.customType({
         source_url: a.string(),
         url_exp: a.string() ,

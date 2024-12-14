@@ -13,9 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main>
-    <h1>New Title</h1>
-    
+  <main>    
     <TitleNew v-if="titleStage.forum"  />
     <hr />
     <TitleSearch v-if="titleStage.search_bar" />
