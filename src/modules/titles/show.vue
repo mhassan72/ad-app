@@ -7,8 +7,6 @@
             <img class="avatarTitle" :src="currentTitle.poster_path" alt="">
             <div class="context">
                 <p>
-                    {{ currentTitle?.vote_average }}
-                    <br  />
                     {{ currentTitle.plot }}
                 </p>
 

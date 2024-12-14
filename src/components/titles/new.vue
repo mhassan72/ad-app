@@ -34,18 +34,18 @@ onMounted(() => {
 
       <div class="field">
         <!-- <label for="title_id">ID </label> -->
-        <input type="text" id="title_id" v-model="newTitle.id">
+        <input type="text" id="title_id" v-model="modelDetails.data.id">
       </div>
 
       <div class="field">
         <!-- <label for="title">Title</label> -->
-        <input type="text" id="title" v-model="newTitle.title">
+        <input type="text" id="title" v-model="modelDetails.data.title">
       </div>
 
       <div class="field">
         <!-- <label for="list_type">List Type</label> -->
 
-        <select name="" id="list_type" v-model="option">
+        <select name="" id="list_type" v-model="modelDetails.data.list_type">
           <option  selected>Select Listing type</option>
           <option value="movie" >Movie</option>
           <option value="tv show">Tv Show</option>
@@ -59,7 +59,7 @@ onMounted(() => {
       
       <div class="field">
         <!-- <label for="plot">Plot</label> -->
-        <textarea name="" id="plot" v-model="newTitle.plot"></textarea>
+        <textarea name="" id="plot" v-model="modelDetails.data.plot"></textarea>
       </div>
 
       <div class="action">
