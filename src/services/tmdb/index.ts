@@ -18,7 +18,7 @@ class TMDBService {
       return DataProcessor.processSearchResults(data, type);
     }
   
-    public static async fetchDetails(id: string, type: "movie" | "tv" = "movie"): Promise<void> {
+    public static async fetchDetails(id: string, type: string): Promise<void> {
       try {
         const details = await Client.fetchFromAPI(`/${type}/${id}`, { language: "en-US" });
         const credits = await Client.fetchFromAPI(`/${type}/${id}/credits`, { language: "en-US" });

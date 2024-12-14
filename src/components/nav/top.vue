@@ -31,7 +31,7 @@ const route = useRoute()
 
 
 
-async function getMovieDetails(titleId: string, list_type: "movie" | "tv") {
+async function getMovieDetails(titleId: string, list_type: string) {
   try {
     const details = await TMDBService.fetchDetails(titleId, list_type);
     console.log("Movie Details:", details);
